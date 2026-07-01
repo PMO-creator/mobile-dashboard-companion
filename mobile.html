@@ -3896,7 +3896,8 @@ function renderGanttForEixoDir(gi){
     }
   });
   const isWeekly=ganttModeDir==='weekly';
-  const LW=(window.innerWidth<768?200:400),TW=1800;
+  const MOB=window.innerWidth<768;
+  const LW=(MOB?188:400),TW=1800;
   const CS=new Date('2026-01-01'),CE=new Date('2026-12-31');
   const GRH=68,TRH=50,SRH=38;
   const HY=isWeekly?22:24,HM=isWeekly?36:48,HW=isWeekly?32:0;
