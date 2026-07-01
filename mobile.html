@@ -599,6 +599,42 @@
 }
 /* ---- /Status Report mobile polish ---- */
 
+/* ---- Gantt / cabeçalhos e cards (mobile polish v2) ---- */
+@media(max-width:768px){
+  /* Cabeçalho da seção Gantt: empilhar título e controles */
+  .gantt-section-title{flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px}
+  .gantt-section-title h2{font-size:15px!important;line-height:1.2;margin:0;letter-spacing:0}
+  .gantt-section-title > div{display:flex!important;flex-wrap:wrap;gap:6px;align-items:center}
+  .gantt-section-title > div > span{flex:1 1 100%;font-size:11px!important;color:#B8E85C!important;order:-1}
+  .gantt-mode-toggle{padding:2px;gap:2px}
+  .gantt-mode-btn{font-size:11px!important;padding:6px 8px!important;white-space:nowrap}
+  .btn-expand,.btn-collapse{font-size:11px!important;padding:6px 8px!important;white-space:nowrap}
+  .expand-dd-btn{font-size:10.5px!important}
+
+  /* Group / Eixo cards do Gantt e do Status Report */
+  .group-inner{gap:8px;padding:10px 10px 10px 8px}
+  .group-toggle{font-size:13px;width:14px}
+  .group-id,.gantt-eixo-id{font-size:12px!important;font-weight:700!important;min-width:26px!important;padding:2px 6px!important;border-radius:4px}
+  .eixo-name,.gantt-eixo-name{font-size:13.5px!important;line-height:1.25!important;font-weight:700!important;letter-spacing:0!important;word-break:break-word;text-transform:none}
+  .group-count,.gantt-eixo-count{font-size:11px!important;font-weight:700!important;padding:3px 8px!important;border-radius:10px;white-space:nowrap}
+  .status-chip,.gantt-status-chip{font-size:10px!important;padding:3px 7px!important;letter-spacing:.3px!important}
+  .group-color-bar{width:4px}
+  .group-period{display:none}
+
+  /* Marcos dentro dos grupos */
+  .marco-item{padding:9px 12px 9px 32px;gap:8px;flex-wrap:wrap}
+  .marco-id{font-size:11px!important;min-width:28px!important}
+  .marco-date{font-size:11px!important}
+  .marco-chip{font-size:10px!important;padding:2px 7px!important}
+  .marco-comment-btn{font-size:11px!important;padding:3px 8px!important}
+  .marco-resp{font-size:11px!important;max-width:110px!important;padding:2px 8px!important}
+
+  /* Header do app: título único legível */
+  .header h1{font-size:15px}
+  .header h1 + div, .header .sub{font-size:11px}
+}
+/* ---- /Gantt polish ---- */
+
 
 </style>
 </head>
