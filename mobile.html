@@ -4009,7 +4009,7 @@ function renderGanttForEixoDir(gi){
     cy+=rh;
   });
   sL+=`<rect width="${LW}" height="${HH}" fill="#1E2E0D"/>`;
-  sL+=`<text x="${LW/2}" y="${HH/2+6}" text-anchor="middle" font-size="13" fill="#8AB870" font-weight="700">GRUPO / MARCO / TAREFA</text>`;
+  sL+=`<text x="${LW/2}" y="${HH/2+6}" text-anchor="middle" font-size="${MOB?11:13}" fill="#8AB870" font-weight="700">GRUPO / MARCO / TAREFA</text>`;
   sL+='</svg>';
   if(isWeekly){
     sR+=`<rect x="0" y="0" width="${TW}" height="${HY}" fill="#111A08"/>`;
