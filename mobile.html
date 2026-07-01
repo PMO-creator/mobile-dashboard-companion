@@ -3971,8 +3971,9 @@ function renderGanttForEixoDir(gi){
       if(row.hasSubs){const arrow=row.marcoExp?'▾':'▶';sL+=`<text x="10" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="11" fill="#5A8A2E" font-weight="700">${arrow}</text>`;}
       sL+=`<line x1="22" y1="${cy}" x2="22" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
       sL+=`<line x1="22" y1="${cy+rh/2}" x2="36" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
-      const nm=(t.tarefa||'').length>46?(t.tarefa||'').slice(0,44)+'...':(t.tarefa||'');
-      sL+=`<text x="39" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="13" fill="#2D4A1E" font-weight="700">${escSVG(nm)}</text>`;
+      const TMAX=MOB?22:46;
+      const nm=(t.tarefa||'').length>TMAX?(t.tarefa||'').slice(0,TMAX-2)+'...':(t.tarefa||'');
+      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700">${escSVG(nm)}</text>`;
       if(row.hasSubs)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttMarcoDir(${gi},${row.parentRi},${row.ti})"/>`;
       if(t.start&&t.end){
         const clipL=fDS&&t.start<fDS,clipR=fDE&&t.end>fDE;
