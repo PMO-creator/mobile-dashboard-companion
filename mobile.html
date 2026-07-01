@@ -1113,7 +1113,8 @@ window.onload=function(){
   loadSheetsData();
 };
 function switchTab(name){
-  if((name==='eap'||name==='eap-dir')&&sessionStorage.getItem('eap_unlocked')!=='1'){_showEapModal();return;}
+  // Mobile: sem senha nas abas Status Report
+  if(false){_showEapModal();return;}
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
