@@ -3994,8 +3994,9 @@ function renderGanttForEixoDir(gi){
       const t=row.data,col=sc(t.status||'A iniciar');
       sL+=`<line x1="44" y1="${cy}" x2="44" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
-      const nm=(t.tarefa||'').length>48?(t.tarefa||'').slice(0,46)+'...':(t.tarefa||'');
-      sL+=`<text x="59" y="${(cy+rh/2+4).toFixed(1)}" font-size="11" fill="#0F172A" font-weight="550">${escSVG(nm)}</text>`;
+      const TFMAX=MOB?24:48;
+      const nm=(t.tarefa||'').length>TFMAX?(t.tarefa||'').slice(0,TFMAX-2)+'...':(t.tarefa||'');
+      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}</text>`;
       if(t.start&&t.end){
         const fullBx=Math.max(0,pxR(new Date(t.start))),fullEx=Math.max(fullBx+3,pxR(new Date(t.end)));
         const solidW=Math.max(3,fullEx-fullBx),by=cy+5,bh=rh-10;
