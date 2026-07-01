@@ -1,24 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "MAZ 2026 — Dashboard Mobile (preview)" },
+      {
+        name: "description",
+        content:
+          "Preview do mobile.html do Dashboard MAZ 2026 (Museu das Amazônias).",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useEffect(() => {
+    // Auto-redirect the preview iframe to the static mobile.html served from /public
+    window.location.replace("/mobile.html");
+  }, []);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#EEF3E8] p-6 text-[#1E293B]">
+      <h1 className="text-lg font-bold">Preview: mobile.html</h1>
+      <p className="text-sm text-[#64748B]">Abrindo o dashboard mobile…</p>
+      <a
+        href="/mobile.html"
+        className="rounded-md bg-[#1E2E0D] px-4 py-2 text-sm font-semibold text-[#B8E85C]"
+      >
+        Abrir mobile.html
+      </a>
     </div>
   );
 }
