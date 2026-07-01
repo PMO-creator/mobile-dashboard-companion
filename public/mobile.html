@@ -555,9 +555,21 @@
   .btn-expand,.btn-collapse{font-size:12px;padding:7px 10px;white-space:nowrap}
   .expand-dd-btn{font-size:11px}
   .expand-dd-menu{min-width:160px;right:0;left:auto}
-  /* KPI cards em 2 colunas quando existirem múltiplos */
-  #kpi-row,#kpi-row-dir{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin-bottom:12px!important}
+  /* KPI: hero full width no topo, mini-grid full width em 3 colunas */
+  #kpi-row,#kpi-row-dir{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-bottom:12px!important}
   #kpi-row > *,#kpi-row-dir > *{min-width:0}
+  .kpi-hero{padding:14px 12px!important}
+  .kpi-hero-value{font-size:40px!important}
+  .kpi-hero-label{font-size:13px!important;margin-bottom:4px!important}
+  .kpi-hero-sub{font-size:11px!important;margin-top:4px!important}
+  .kpi-mini-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:auto!important;gap:6px!important}
+  .kpi-mini{padding:7px 8px!important;min-width:0}
+  .kpi-mini-label{font-size:9.5px!important;letter-spacing:.3px!important;line-height:1.15!important;margin-bottom:2px!important}
+  .kpi-mini-value{font-size:18px!important}
+  .kpi-mini-count{font-size:10px!important;margin-top:1px!important}
+  /* Badge "N grupos" ao lado do título WBS não sobrepor */
+  .wbs-header h2{padding-right:0!important}
+  .wbs-header h2 > *{flex-shrink:0}
   /* Search zone compacta */
   .search-zone{padding:10px 12px;gap:8px;flex-wrap:wrap}
   .search-zone-inner{flex:1 1 100%;min-width:0}
