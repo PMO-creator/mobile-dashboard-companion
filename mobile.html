@@ -510,6 +510,40 @@
   .comp-modal-banner{background:#fff3cd!important;color:#856404!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .comp-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+/* ============ MOBILE OVERRIDES (added by mobile.html) ============ */
+@media(max-width:768px){
+  html,body{overflow-x:hidden}
+  body{padding-bottom:68px;-webkit-tap-highlight-color:transparent}
+  .header{padding:8px 12px;gap:8px;flex-wrap:nowrap}
+  .header-logo{height:36px}
+  .header h1{font-size:16px;line-height:1.15;font-weight:800}
+  .header-left{gap:8px;min-width:0;flex:1}
+  .header .tab-nav{display:none!important}
+  .container{padding:10px}
+  .filter-bar{position:sticky;top:56px;z-index:900;padding:8px 10px;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;white-space:nowrap}
+  .filter-bar .ms-btn{max-width:none;font-size:12px;padding:6px 10px}
+  .filter-bar .ms-label-text{max-width:100px}
+  .charts-row{grid-template-columns:1fr!important;gap:12px}
+  table{font-size:12px}
+  .tab-panel{padding-bottom:12px}
+  .n2-fab,#n2-fab,#n2-fab-dir{bottom:80px!important;right:12px!important;font-size:14px!important;padding:9px 14px!important}
+  /* Bottom tabbar */
+  .mobile-tabbar{position:fixed;left:0;right:0;bottom:0;background:#1E2E0D;border-top:2px solid #8AC43A;
+    display:grid;grid-template-columns:repeat(6,1fr);z-index:9999;
+    padding-bottom:env(safe-area-inset-bottom,0);box-shadow:0 -6px 18px rgba(0,0,0,.35)}
+  .mobile-tabbar button{background:none;border:none;color:#B8E85C;padding:8px 2px;
+    display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;font-weight:600;
+    cursor:pointer;line-height:1.1;min-height:56px}
+  .mobile-tabbar button .mt-ico{font-size:20px;line-height:1}
+  .mobile-tabbar button.active{color:#FFF;background:linear-gradient(180deg,rgba(138,196,58,.18),transparent)}
+  .mobile-tabbar button.active .mt-ico{filter:drop-shadow(0 0 4px rgba(138,196,58,.7))}
+  /* Any wide tables become horizontally scrollable */
+  .tab-panel table, .tab-panel .tbl-wrap{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+@media(min-width:769px){ .mobile-tabbar{display:none!important} }
+/* ============ /MOBILE OVERRIDES ============ */
+
 </style>
 </head>
 <body>
@@ -5152,3 +5186,37 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
   </div>
 </div>
 
+<!-- Mobile bottom tab bar (only visible <=768px) -->
+<nav class="mobile-tabbar" role="tablist" aria-label="Navegação principal">
+  <button type="button" onclick="switchTab('gantt')" id="mt-gantt"><span class="mt-ico">📊</span><span>Gantt</span></button>
+  <button type="button" onclick="switchTab('gantt-dir')" id="mt-gantt-dir"><span class="mt-ico">📈</span><span>Gantt Dir.</span></button>
+  <button type="button" onclick="switchTab('eap')" id="mt-eap"><span class="mt-ico">📋</span><span>Status</span></button>
+  <button type="button" onclick="switchTab('eap-dir')" id="mt-eap-dir"><span class="mt-ico">🗂️</span><span>Status Dir.</span></button>
+  <button type="button" onclick="switchTab('reqs')" id="mt-reqs"><span class="mt-ico">📦</span><span>REQs</span></button>
+  <button type="button" onclick="switchTab('areas')" id="mt-areas"><span class="mt-ico">🗺️</span><span>Áreas</span></button>
+</nav>
+<script>
+(function(){
+  // Sync mobile tabbar active state with existing switchTab()
+  var MAP={gantt:'mt-gantt','gantt-dir':'mt-gantt-dir',eap:'mt-eap','eap-dir':'mt-eap-dir',reqs:'mt-reqs',areas:'mt-areas'};
+  function syncMobile(tab){
+    try{
+      Object.values(MAP).forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('active');});
+      var t=MAP[tab]; if(t){var e=document.getElementById(t); if(e)e.classList.add('active');}
+    }catch(_){ }
+  }
+  // Wrap original switchTab
+  var _orig=window.switchTab;
+  window.switchTab=function(t){ try{ if(_orig) _orig.apply(this, arguments); }finally{ syncMobile(t); } };
+  // Initial sync when DOM ready
+  document.addEventListener('DOMContentLoaded',function(){
+    // Detect current active from existing tab-btn.active if any
+    var btn=document.querySelector('.tab-btn.active');
+    if(btn){var m=btn.id.match(/^tab-btn-(.+)$/); if(m) syncMobile(m[1]);}
+    else syncMobile('gantt');
+  });
+})();
+</script>
+
+</body>
+</html>
