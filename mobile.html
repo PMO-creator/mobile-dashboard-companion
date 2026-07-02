@@ -5412,15 +5412,38 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
   });
   // Re-render on orientation/resize so Gantt recalcula LW e fontes mobile
   var _reRT;
+  function _restoreGantt(openArr, renderFn, bodyPrefix){
+    if(!Array.isArray(openArr)) return;
+    openArr.forEach(function(open, gi){
+      if(!open) return;
+      try{ renderFn(gi); }catch(_){ return; }
+      var body=document.getElementById(bodyPrefix+gi);
+      var chev=document.getElementById((bodyPrefix==='gbody-'?'gchev-':'gchev-dir-')+gi);
+      if(body) body.style.maxHeight='none';
+      if(chev) chev.style.transform='rotate(90deg)';
+    });
+  }
   function _reRender(){
     var btn=document.querySelector('.tab-btn.active'); var t=btn&&(btn.id.match(/^tab-btn-(.+)$/)||[])[1];
     try{
-      if(t==='gantt' && typeof renderGanttSection==='function') renderGanttSection();
-      else if(t==='gantt-dir' && typeof renderGanttSectionDir==='function') renderGanttSectionDir();
+      if(t==='gantt' && typeof renderGanttSection==='function'){
+        renderGanttSection();
+        if(typeof ganttRendered!=='undefined') for(var i=0;i<ganttRendered.length;i++) ganttRendered[i]=false;
+        _restoreGantt(window.ganttOpen, renderGanttForEixo, 'gbody-');
+        if(typeof ganttRendered!=='undefined' && Array.isArray(window.ganttOpen))
+          window.ganttOpen.forEach(function(o,gi){ if(o) ganttRendered[gi]=true; });
+      } else if(t==='gantt-dir' && typeof renderGanttSectionDir==='function'){
+        renderGanttSectionDir();
+        if(typeof ganttRenderedDir!=='undefined') for(var j=0;j<ganttRenderedDir.length;j++) ganttRenderedDir[j]=false;
+        _restoreGantt(window.ganttOpenDir, renderGanttForEixoDir, 'gbody-dir-');
+        if(typeof ganttRenderedDir!=='undefined' && Array.isArray(window.ganttOpenDir))
+          window.ganttOpenDir.forEach(function(o,gi){ if(o) ganttRenderedDir[gi]=true; });
+      }
     }catch(e){}
   }
   window.addEventListener('resize',function(){clearTimeout(_reRT);_reRT=setTimeout(_reRender,200);});
   window.addEventListener('orientationchange',function(){setTimeout(_reRender,300);});
+
 })();
 </script>
 
