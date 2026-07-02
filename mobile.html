@@ -4025,8 +4025,8 @@ function renderGanttForEixoDir(gi){
       if(row.hasTasks){const arrow=row.expanded?'▾':'▶';sL+=`<text x="14" y="${(cy+rh/2+5).toFixed(1)}" font-size="14" fill="#3A6018" font-weight="700">${arrow}</text>`;}
       sL+=`<circle cx="${LW-16}" cy="${(cy+rh/2).toFixed(1)}" r="7" fill="${col}"/>`;
       const MAX=MOB?20:44;
-      const nm=g.name.length>MAX?g.name.slice(0,MAX-2)+'...':g.name;
-      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}</text>`;
+      const _trGd=g.name.length>MAX, nm=_trGd?g.name.slice(0,MAX-2)+'...':g.name;
+      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}${_trGd?`<title>${escSVG(g.name)}</title>`:''}</text>`;
       if(row.hasTasks)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttGroupDir(${gi},${row.ri})"/>`;
       if(g.start&&g.end){
         const clipL=fDS&&g.start<fDS,clipR=fDE&&g.end>fDE;
