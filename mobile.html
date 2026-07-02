@@ -5459,8 +5459,17 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
       }
     }catch(e){}
   }
-  window.addEventListener('resize',function(){clearTimeout(_reRT);_reRT=setTimeout(_reRender,200);});
-  window.addEventListener('orientationchange',function(){setTimeout(_reRender,300);});
+  // Ignora resize disparado só por barra de URL do iOS/Safari (muda altura, não largura)
+  var _mmMob=window.matchMedia('(max-width:900px),(orientation:landscape) and (max-height:600px),(hover:none) and (pointer:coarse) and (max-width:1180px)');
+  var _lastW=window.innerWidth, _lastMOB=_mmMob.matches;
+  function _maybeReRender(){
+    var w=window.innerWidth, mob=_mmMob.matches;
+    if(w===_lastW && mob===_lastMOB) return; // só altura mudou → não re-renderiza
+    _lastW=w; _lastMOB=mob;
+    _reRender();
+  }
+  window.addEventListener('resize',function(){clearTimeout(_reRT);_reRT=setTimeout(_maybeReRender,220);});
+  window.addEventListener('orientationchange',function(){setTimeout(function(){_lastW=window.innerWidth;_lastMOB=_mmMob.matches;_reRender();},300);});
 
   // ─── Tooltip por toque em textos truncados do Gantt (coluna sticky) ───
   var _tt=document.createElement('div');
