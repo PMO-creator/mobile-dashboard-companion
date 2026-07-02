@@ -612,10 +612,10 @@
   /* KPI: hero full width no topo, mini-grid full width em 3 colunas */
   #kpi-row,#kpi-row-dir{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-bottom:12px!important}
   #kpi-row > *,#kpi-row-dir > *{min-width:0}
-  .kpi-hero{padding:14px 12px!important}
-  .kpi-hero-value{font-size:40px!important}
-  .kpi-hero-label{font-size:13px!important;margin-bottom:4px!important}
-  .kpi-hero-sub{font-size:11px!important;margin-top:4px!important}
+  .kpi-hero{padding:6px 12px!important;flex-direction:row!important;justify-content:space-between!important;align-items:center!important;text-align:left!important;gap:8px}
+  .kpi-hero-value{font-size:24px!important;line-height:1!important;order:2;flex-shrink:0}
+  .kpi-hero-label{font-size:11px!important;margin-bottom:0!important;order:1;flex:1;text-align:left}
+  .kpi-hero-sub{font-size:10px!important;margin-top:0!important;order:3;flex-shrink:0;text-align:right}
   .kpi-mini-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:auto!important;gap:6px!important}
   .kpi-mini{padding:7px 8px!important;min-width:0}
   .kpi-mini-label{font-size:9.5px!important;letter-spacing:.3px!important;line-height:1.15!important;margin-bottom:2px!important}
