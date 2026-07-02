@@ -89,12 +89,12 @@
 
   /* CHARTS */
   .charts-row{display:grid;grid-template-columns:280px 1fr;gap:var(--gap);margin-bottom:var(--gap)}
-  @media(max-width:768px){.charts-row{grid-template-columns:1fr}}
+  @media(max-width:768px),(max-height:500px) and (orientation:landscape){.charts-row{grid-template-columns:1fr}}
 
   /* ═══════════════════════════════════════════════
      RESPONSIVE MOBILE  (≤ 768px)
   ═══════════════════════════════════════════════ */
-  @media(max-width:768px){
+  @media(max-width:768px),(max-height:500px) and (orientation:landscape){
     /* ── Header ── */
     .header{padding:10px 14px;gap:8px}
     .header-logo{height:40px}
@@ -512,7 +512,7 @@
 }
 
 /* ============ MOBILE OVERRIDES (added by mobile.html) ============ */
-@media(max-width:768px){
+@media(max-width:768px),(max-height:500px) and (orientation:landscape){
   html,body{overflow-x:hidden}
   body{padding-bottom:68px;-webkit-tap-highlight-color:transparent}
   .header{padding:8px 12px;gap:8px;flex-wrap:nowrap}
@@ -545,7 +545,7 @@
 /* ============ /MOBILE OVERRIDES ============ */
 
 /* ---- Status Report + SR Diretoria (mobile polish) ---- */
-@media(max-width:768px){
+@media(max-width:768px),(max-height:500px) and (orientation:landscape){
   /* wbs-header: título em cima, ações abaixo com scroll horizontal */
   .wbs-header{flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px}
   .wbs-header h2{font-size:16px!important;line-height:1.2}
@@ -600,7 +600,7 @@
 /* ---- /Status Report mobile polish ---- */
 
 /* ---- Gantt / cabeçalhos e cards (mobile polish v2) ---- */
-@media(max-width:768px){
+@media(max-width:768px),(max-height:500px) and (orientation:landscape){
   /* Cabeçalho da seção Gantt: empilhar título e controles */
   .gantt-section-title{flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px}
   .gantt-section-title h2{font-size:15px!important;line-height:1.2;margin:0;letter-spacing:0}
@@ -660,7 +660,7 @@
 /* ---- /Gantt polish ---- */
 
 /* ---- REQs + Áreas (mobile polish) ---- */
-@media(max-width:768px){
+@media(max-width:768px),(max-height:500px) and (orientation:landscape){
   /* ===== REQs ===== */
   .req-card{margin:0 0 12px 0!important}
   .req-header{flex-direction:column!important;align-items:stretch!important;gap:8px!important;padding:10px 12px!important}
@@ -3516,7 +3516,7 @@ function renderGanttForEixo(gi){
 
   // ── Dimensões e range ──────────────────────────────────────────────────────
   const isWeekly = ganttMode==='weekly';
-  const MOB=window.innerWidth<768;
+  const MOB=(window.innerWidth<768||(window.innerHeight<500&&window.innerWidth>window.innerHeight));
   const LW=(MOB?188:400), TW=1800;
   const CS=new Date('2026-01-01'), CE=new Date('2026-12-31');
   const GRH=MOB?44:68, TRH=MOB?34:50, SRH=MOB?26:38;
@@ -3949,7 +3949,7 @@ function renderGanttForEixoDir(gi){
     }
   });
   const isWeekly=ganttModeDir==='weekly';
-  const MOB=window.innerWidth<768;
+  const MOB=(window.innerWidth<768||(window.innerHeight<500&&window.innerWidth>window.innerHeight));
   const LW=(MOB?188:400),TW=1800;
   const CS=new Date('2026-01-01'),CE=new Date('2026-12-31');
   const GRH=MOB?44:68,TRH=MOB?34:50,SRH=MOB?26:38;
