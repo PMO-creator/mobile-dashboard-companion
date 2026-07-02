@@ -5389,6 +5389,17 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
     if(btn){var m=btn.id.match(/^tab-btn-(.+)$/); if(m) syncMobile(m[1]);}
     else syncMobile('gantt');
   });
+  // Re-render on orientation/resize so Gantt recalcula LW e fontes mobile
+  var _reRT;
+  function _reRender(){
+    var btn=document.querySelector('.tab-btn.active'); var t=btn&&(btn.id.match(/^tab-btn-(.+)$/)||[])[1];
+    try{
+      if(t==='gantt' && typeof renderGanttSection==='function') renderGanttSection();
+      else if(t==='gantt-dir' && typeof renderGanttSectionDir==='function') renderGanttSectionDir();
+    }catch(e){}
+  }
+  window.addEventListener('resize',function(){clearTimeout(_reRT);_reRT=setTimeout(_reRender,200);});
+  window.addEventListener('orientationchange',function(){setTimeout(_reRender,300);});
 })();
 </script>
 
