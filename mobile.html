@@ -566,9 +566,13 @@
   .header-left{gap:8px;min-width:0;flex:1}
   .header .tab-nav{display:none!important}
   .container{padding:10px}
-  .filter-bar{position:sticky;top:56px;z-index:900;padding:8px 10px;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;white-space:nowrap}
+  .filter-bar{position:sticky;top:56px;z-index:900;padding:8px 10px;gap:6px;overflow:visible!important;flex-wrap:wrap!important;white-space:normal}
   .filter-bar .ms-btn{max-width:none;font-size:12px;padding:6px 10px}
   .filter-bar .ms-label-text{max-width:100px}
+  /* Dropdowns dos filtros: garantir que fiquem acima da tabbar e de qualquer sticky */
+  .filter-bar .ms-menu,.filter-bar .expand-dd-menu,.ms-menu,.expand-dd-menu{z-index:10500!important}
+  /* Filtros das REQs (status filter) também escapam do clipping */
+  .req-status-filter{overflow:visible!important}
   .charts-row{grid-template-columns:1fr!important;gap:12px}
   table{font-size:12px}
   .tab-panel{padding-bottom:12px}
