@@ -566,9 +566,13 @@
   .header-left{gap:8px;min-width:0;flex:1}
   .header .tab-nav{display:none!important}
   .container{padding:10px}
-  .filter-bar{position:sticky;top:56px;z-index:900;padding:8px 10px;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;white-space:nowrap}
+  .filter-bar{position:sticky;top:56px;z-index:900;padding:8px 10px;gap:6px;overflow:visible!important;flex-wrap:wrap!important;white-space:normal}
   .filter-bar .ms-btn{max-width:none;font-size:12px;padding:6px 10px}
   .filter-bar .ms-label-text{max-width:100px}
+  /* Dropdowns dos filtros: garantir que fiquem acima da tabbar e de qualquer sticky */
+  .filter-bar .ms-menu,.filter-bar .expand-dd-menu,.ms-menu,.expand-dd-menu{z-index:10500!important}
+  /* Filtros das REQs (status filter) também escapam do clipping */
+  .req-status-filter{overflow:visible!important}
   .charts-row{grid-template-columns:1fr!important;gap:12px}
   table{font-size:12px}
   .tab-panel{padding-bottom:12px}
@@ -747,7 +751,7 @@
   .req-kpi-row > *{min-width:0!important;padding:10px!important}
   .req-kpi-row .kpi-label,.req-kpi-row [class*="label"]{font-size:11px!important;letter-spacing:.2px!important}
   .req-kpi-row .kpi-value,.req-kpi-row [class*="value"]{font-size:22px!important}
-  .req-status-filter{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;gap:6px!important;padding:8px 12px!important}
+  .req-status-filter{display:flex!important;flex-wrap:wrap!important;overflow:visible!important;gap:6px!important;padding:8px 12px!important}
   .req-status-filter > *{flex:0 0 auto!important;font-size:11px!important;padding:6px 10px!important;white-space:nowrap!important}
   .req-quadros-grid{grid-template-columns:1fr!important;gap:10px!important;padding:0 12px 12px!important}
   .req-quadros-grid > *{min-width:0!important}
@@ -759,8 +763,8 @@
   .areas-ctrl-right{flex-wrap:wrap!important;gap:6px!important;justify-content:flex-start!important}
   .areas-ctrl-right > *{flex:0 0 auto!important;margin:0!important}
   #pdf-export-btn{font-size:11px!important;padding:6px 10px!important;margin-left:0!important}
-  /* Filtros sticky (status/resp/áreas) já cobertos por .filter-bar, mas garantir */
-  #tab-areas .filter-bar,#tab-areas > .filter-bar{overflow-x:auto!important}
+  /* Filtros sticky (status/resp/áreas) — overflow:visible para dropdowns não sumirem atrás do dashboard */
+  #tab-areas .filter-bar,#tab-areas > .filter-bar{overflow:visible!important;flex-wrap:wrap!important}
 
   /* Área section card */
   .areas-section{margin:0 0 10px 0!important;border-radius:8px!important}
