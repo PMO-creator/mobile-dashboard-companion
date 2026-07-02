@@ -194,17 +194,23 @@
     .req-quadros-grid{padding:8px;gap:10px}
     .req-group-body>.req-quadros-grid{padding:8px}
     .req-table-wrap{padding:0 6px 8px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
-    /* Colunas com LARGURA FIXA e IDÊNTICA em todos os quadros/status */
-    table.req-q-table{font-size:11px!important;width:auto!important;min-width:100%;table-layout:fixed}
-    .req-q-table th,.req-q-table td{padding:7px 8px!important;font-size:11px!important;vertical-align:middle}
-    .req-q-table th:nth-child(1),.req-q-table td:nth-child(1){width:64px!important;text-align:center}
-    .req-q-table th:nth-child(2),.req-q-table td:nth-child(2){width:150px!important;white-space:normal;word-break:break-word;overflow:hidden;text-overflow:initial}
-    .req-q-table th:nth-child(3),.req-q-table td:nth-child(3){width:180px!important;white-space:normal;word-break:break-word;overflow:hidden;text-overflow:initial}
-    .req-q-table th:nth-child(4),.req-q-table td:nth-child(4){width:104px!important;white-space:normal}
+    /* Scroll horizontal dentro do quadro (todas as 7 colunas iguais entre status) */
+    .req-quadro-body{overflow-x:auto!important;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+    table.req-q-table{font-size:11px!important;width:max-content!important;min-width:100%!important;table-layout:fixed!important;border-collapse:collapse}
+    .req-q-table th,.req-q-table td{padding:8px 10px!important;font-size:11px!important;vertical-align:middle;box-sizing:border-box}
+    .req-q-table th{white-space:nowrap!important}
+    .req-q-table th:nth-child(1),.req-q-table td:nth-child(1){width:56px!important;min-width:56px;text-align:center}
+    .req-q-table th:nth-child(2),.req-q-table td:nth-child(2){width:140px!important;min-width:140px;white-space:normal;word-break:break-word}
+    .req-q-table th:nth-child(3),.req-q-table td:nth-child(3){width:200px!important;min-width:200px;white-space:normal;word-break:break-word}
+    .req-q-table th:nth-child(4),.req-q-table td:nth-child(4){width:110px!important;min-width:110px;white-space:normal;word-break:break-word}
+    .req-q-table th:nth-child(5),.req-q-table td:nth-child(5){width:120px!important;min-width:120px;white-space:normal}
+    .req-q-table th:nth-child(6),.req-q-table td:nth-child(6){width:96px!important;min-width:96px;white-space:nowrap;text-align:center}
+    .req-q-table th:nth-child(7),.req-q-table td:nth-child(7){width:96px!important;min-width:96px;white-space:nowrap;text-align:center}
+    .req-q-table td[style*="font-size:16px"]{font-size:11px!important}
     .req-q-table tr{min-height:44px}
-    .req-q-table tr:hover td{background:transparent} /* mata hover no touch */
+    .req-q-table tr:hover td{background:transparent}
     .req-q-table tr:active td{background:#F1F5F9}
-    .req-status-chip{font-size:10px!important;padding:2px 7px!important;white-space:normal;line-height:1.25}
+    .req-status-chip{font-size:10px!important;padding:2px 7px!important;white-space:normal;line-height:1.25;display:inline-block}
     /* Alvos de toque: header e linhas */
     .req-header,.req-group-header,.req-quadro-header{touch-action:manipulation;-webkit-tap-highlight-color:rgba(138,196,58,.15)}
 
