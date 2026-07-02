@@ -3650,7 +3650,7 @@ function renderGanttForEixo(gi){
       sL+=`<line x1="22" y1="${cy+rh/2}" x2="36" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
       const _TMAX=MOB?18:46, _fullT=(t.tarefa||'');
       const _trT=_fullT.length>_TMAX, nm=_trT?_fullT.slice(0,_TMAX-2)+'…':_fullT;
-      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700">${escSVG(nm)}${_trT?`<title>${escSVG(_fullT)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700"${_trT?` class="gtt" data-tip="${escSVG(_fullT)}"`:''}>${escSVG(nm)}${_trT?`<title>${escSVG(_fullT)}</title>`:''}</text>`;
       if(row.hasSubs)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttMarco(${gi},${row.parentRi},${row.ti})"/>`;
       // Barra (sR)
       if(t.start&&t.end){
