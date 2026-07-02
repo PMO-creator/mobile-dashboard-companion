@@ -4070,7 +4070,7 @@ function renderGanttForEixoDir(gi){
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       const TFMAX=MOB?20:48, _fullTFd=(t.tarefa||'');
       const _trTFd=_fullTFd.length>TFMAX, nm=_trTFd?_fullTFd.slice(0,TFMAX-2)+'...':_fullTFd;
-      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}${_trTFd?`<title>${escSVG(_fullTFd)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550"${_trTFd?` class="gtt" data-tip="${escSVG(_fullTFd)}"`:''}>${escSVG(nm)}${_trTFd?`<title>${escSVG(_fullTFd)}</title>`:''}</text>`;
       if(t.start&&t.end){
         const fullBx=Math.max(0,pxR(new Date(t.start))),fullEx=Math.max(fullBx+3,pxR(new Date(t.end)));
         const solidW=Math.max(3,fullEx-fullBx),by=cy+5,bh=rh-10;
