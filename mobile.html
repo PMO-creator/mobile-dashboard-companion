@@ -568,7 +568,11 @@
   .container{padding:10px}
   .filter-bar{position:sticky;top:56px;z-index:900;padding:8px 10px;gap:6px;overflow:visible!important;flex-wrap:wrap!important;white-space:normal}
   .filter-bar .ms-btn{max-width:none;font-size:12px;padding:6px 10px}
-  .filter-bar .ms-label-text{max-width:100px}
+   .filter-bar .ms-label-text{max-width:100px}
+   /* Date inputs no mesmo tamanho dos botões de filtro (status/responsáveis) */
+   .filter-bar .filter-date{font-size:12px!important;padding:6px 8px!important;font-weight:600!important;max-width:130px}
+   .filter-bar .filter-date-label{font-size:12px!important;font-weight:600!important}
+   .filter-bar .btn-apply-date,.filter-bar .btn-clear-date,.filter-bar .btn-foco{font-size:12px!important;padding:6px 10px!important;font-weight:600!important}
   /* Dropdowns dos filtros: garantir que fiquem acima da tabbar e de qualquer sticky */
   .filter-bar .ms-menu,.filter-bar .expand-dd-menu,.ms-menu,.expand-dd-menu{z-index:10500!important}
   /* Filtros das REQs (status filter) também escapam do clipping */
