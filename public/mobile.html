@@ -1334,6 +1334,7 @@ function switchTab(name){
   var _bfoco=document.getElementById('btn-foco');
   if(_bfoco)_bfoco.style.display=(name==='eap')?'':'none';
   if(name==='eap'){updateN2Fab();}
+  if(name==='eap-dir'){updateN2Fab_Dir();}
   if(name==='areas'){buildAreasFilter();if(AREAS_DATA.length)renderAreasTab();}
 }
 
