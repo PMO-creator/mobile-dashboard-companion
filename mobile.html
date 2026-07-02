@@ -3623,7 +3623,7 @@ function renderGanttForEixo(gi){
       sL+=`<circle cx="${LW-16}" cy="${(cy+rh/2).toFixed(1)}" r="7" fill="${col}"/>`;
       const _MAX=MOB?16:44;
       const _trG=g.name.length>_MAX, nm=_trG?g.name.slice(0,_MAX-2)+'…':g.name;
-      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}${_trG?`<title>${escSVG(g.name)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700"${_trG?` class="gtt" data-tip="${escSVG(g.name)}"`:''}>${escSVG(nm)}${_trG?`<title>${escSVG(g.name)}</title>`:''}</text>`;
       if(row.hasTasks)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttGroup(${gi},${row.ri})"/>`;
       // Barra (sR)
       if(g.start&&g.end){
