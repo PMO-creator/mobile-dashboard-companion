@@ -763,8 +763,8 @@
   .areas-ctrl-right{flex-wrap:wrap!important;gap:6px!important;justify-content:flex-start!important}
   .areas-ctrl-right > *{flex:0 0 auto!important;margin:0!important}
   #pdf-export-btn{font-size:11px!important;padding:6px 10px!important;margin-left:0!important}
-  /* Filtros sticky (status/resp/áreas) já cobertos por .filter-bar, mas garantir */
-  #tab-areas .filter-bar,#tab-areas > .filter-bar{overflow-x:auto!important}
+  /* Filtros sticky (status/resp/áreas) — overflow:visible para dropdowns não sumirem atrás do dashboard */
+  #tab-areas .filter-bar,#tab-areas > .filter-bar{overflow:visible!important;flex-wrap:wrap!important}
 
   /* Área section card */
   .areas-section{margin:0 0 10px 0!important;border-radius:8px!important}
