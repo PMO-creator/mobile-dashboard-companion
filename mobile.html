@@ -1733,6 +1733,7 @@ function abrevNome(n){
     if(n2FilterActive){fab.textContent='✕ Ver todos · '+n;fab.style.background='#1A3A8A';fab.style.color='white';}
     else{fab.textContent='📋 Pauta N2 · '+n;fab.style.background=locked?'#5C3A8A':'#3D6218';fab.style.color='#B8E85C';}
     var onEap=document.getElementById('tab-eap')&&document.getElementById('tab-eap').classList.contains('active');
+    fab.style.display=((n>0||n2FilterActive)&&onEap)?'inline-flex':'none';
     var cfab=document.getElementById('n2-clear-fab');
     var pfab=document.getElementById('n2-publish-fab');
     var lfab=document.getElementById('n2-lock-fab');var pptfab=document.getElementById('n2-ppt-fab');
@@ -2152,6 +2153,7 @@ function abrevNome(n){
     if(n2FilterActive_Dir){fab.textContent='✕ Ver todos · '+n;fab.style.background='#1A3A8A';fab.style.color='white';}
     else{fab.textContent='📋 Pauta N2 · '+n;fab.style.background=locked?'#5C3A8A':'#3D6218';fab.style.color='#B8E85C';}
     var onDir=document.getElementById('tab-eap-dir')&&document.getElementById('tab-eap-dir').classList.contains('active');
+    fab.style.display=((n>0||n2FilterActive_Dir)&&onDir)?'inline-flex':'none';
     var cfab=document.getElementById('n2-clear-fab-dir');
     var pfab=document.getElementById('n2-publish-fab-dir');
     var lfab=document.getElementById('n2-lock-fab-dir');var pptfab=document.getElementById('n2-ppt-fab-dir');
