@@ -28,7 +28,8 @@
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--surface);color:var(--text);min-height:100vh;min-height:100dvh}
   /* iOS Safari: tap alvo no SVG do Gantt */
-  text.gtt{cursor:pointer;-webkit-tap-highlight-color:rgba(138,196,58,.25);touch-action:manipulation}
+  text.gtt{cursor:pointer;-webkit-tap-highlight-color:rgba(138,196,58,.25);touch-action:manipulation;pointer-events:visiblePainted;paint-order:stroke fill;stroke:rgba(0,0,0,0);stroke-width:14px}
+  .gantt-svg-wrap svg text.gtt:active{fill:#8AC43A!important}
 
   /* HEADER */
   .header{background:var(--bg);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:3px solid var(--accent);position:sticky;top:0;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,.4)}
@@ -5552,9 +5553,20 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
       n=n.parentNode;
     } return null;
   }
+  // Distingue tap de swipe: ignora se o dedo se mexeu mais de 10px
+  var _tsx=0,_tsy=0,_tsMoved=false;
+  document.addEventListener('touchstart',function(ev){
+    var t=ev.touches&&ev.touches[0]; if(!t)return;
+    _tsx=t.clientX;_tsy=t.clientY;_tsMoved=false;
+  },{capture:true,passive:true});
+  document.addEventListener('touchmove',function(ev){
+    var t=ev.touches&&ev.touches[0]; if(!t)return;
+    if(Math.abs(t.clientX-_tsx)>10||Math.abs(t.clientY-_tsy)>10) _tsMoved=true;
+  },{capture:true,passive:true});
   function _tapHandler(ev){
+    if(ev.type==='touchend' && _tsMoved){ return; } // foi swipe, não tap
     var el=_findGtt(ev.target);
-    if(el){ ev.stopPropagation(); if(ev.cancelable) ev.preventDefault(); _showTipAt(el); }
+    if(el){ ev.stopPropagation(); if(ev.cancelable && ev.type==='touchend') ev.preventDefault(); _showTipAt(el); }
     else if(_tt.style.opacity==='1'){ _hideTip(); }
   }
   document.addEventListener('click',_tapHandler,true);
