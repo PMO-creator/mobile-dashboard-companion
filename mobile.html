@@ -688,8 +688,16 @@
   /* checkbox nunca dispara o toggle */
   .task-card .n2-check{position:relative;z-index:2}
   /* Gantt: hint de scroll horizontal mais visível */
-  .gantt-svg-wrap{position:relative}
-  .gantt-svg-wrap::after{content:"→";position:absolute;top:8px;right:8px;background:#1A3A8A;color:#fff;padding:4px 8px;border-radius:12px;font-size:11px;font-weight:700;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.25);animation:mobHintPulse 1.6s ease-in-out infinite}
+  .gantt-svg-wrap{position:relative;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+  .gantt-svg-wrap::after{content:"→";position:absolute;top:8px;right:8px;background:#1A3A8A;color:#fff;padding:4px 8px;border-radius:12px;font-size:11px;font-weight:700;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.25);animation:mobHintPulse 1.6s ease-in-out infinite;z-index:5}
+  /* Scroller interno do Gantt: manter sticky suave e sem sangramento */
+  .gantt-svg-wrap > div{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scroll-behavior:auto}
+  /* Coluna sticky: composição própria e sem "descolar" no rubber-band do iOS */
+  .gantt-svg-wrap > div > div:first-child{
+    position:-webkit-sticky!important;position:sticky!important;left:0!important;
+    will-change:transform;transform:translateZ(0);
+    contain:layout paint;background:#FAFBFC
+  }
   @keyframes mobHintPulse{0%,100%{transform:translateX(0);opacity:.85}50%{transform:translateX(-6px);opacity:1}}
 
   /* Header do app: título único legível */
@@ -5487,20 +5495,31 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
     }, wait);
   }
   window.addEventListener('resize',function(){
+    if(_touching){ _pendingResize=true; return; } // não re-renderiza durante gesto
     clearTimeout(_reRT);
-    _reRT=setTimeout(_scheduleReRender,300); // debounce inicial
+    _reRT=setTimeout(_scheduleReRender,300);
   }, {passive:true});
   window.addEventListener('orientationchange',function(){
-    // rotação: espera o layout estabilizar e força re-render mesmo se width ainda não bateu
     setTimeout(function(){
       _lastW=window.innerWidth; _lastMOB=_mmMob.matches;
       if(_pendingRAF) cancelAnimationFrame(_pendingRAF);
       _pendingRAF=requestAnimationFrame(_runReRender);
     }, 350);
   }, {passive:true});
-  // matchMedia change (breakpoint atravessado sem resize, ex.: split-view)
   if(_mmMob.addEventListener) _mmMob.addEventListener('change',_scheduleReRender);
   else if(_mmMob.addListener) _mmMob.addListener(_scheduleReRender);
+
+  // Suprime re-render enquanto o dedo está na tela (evita "piscar" durante swipe)
+  var _touching=false, _pendingResize=false, _touchEndT;
+  window.addEventListener('touchstart',function(){ _touching=true; clearTimeout(_touchEndT); }, {passive:true, capture:true});
+  window.addEventListener('touchend',function(){
+    clearTimeout(_touchEndT);
+    _touchEndT=setTimeout(function(){
+      _touching=false;
+      if(_pendingResize){ _pendingResize=false; _scheduleReRender(); }
+    }, 250); // pequena folga pro Safari terminar a inércia
+  }, {passive:true, capture:true});
+  window.addEventListener('touchcancel',function(){ _touching=false; }, {passive:true, capture:true});
 
   // ─── Tooltip por toque em textos truncados do Gantt (coluna sticky) ───
   var _tt=document.createElement('div');

@@ -5459,17 +5459,48 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
       }
     }catch(e){}
   }
-  // Ignora resize disparado só por barra de URL do iOS/Safari (muda altura, não largura)
+  // ─── Debounce + throttle robusto para resize/rotate no iOS Safari ───
+  // Regras:
+  //  • ignora mudanças só de altura (barra de URL do Safari)
+  //  • debounce de 300ms para acumular eventos em rajada
+  //  • throttle: no máx. 1 re-render a cada 600ms
+  //  • coalesce via requestAnimationFrame (pinta antes de rodar o pesado)
+  //  • trava reentrância enquanto um re-render está em curso
   var _mmMob=window.matchMedia('(max-width:900px),(orientation:landscape) and (max-height:600px),(hover:none) and (pointer:coarse) and (max-width:1180px)');
   var _lastW=window.innerWidth, _lastMOB=_mmMob.matches;
-  function _maybeReRender(){
-    var w=window.innerWidth, mob=_mmMob.matches;
-    if(w===_lastW && mob===_lastMOB) return; // só altura mudou → não re-renderiza
-    _lastW=w; _lastMOB=mob;
-    _reRender();
+  var _lastRunAt=0, _pendingRAF=0, _running=false;
+  function _runReRender(){
+    if(_running) return;
+    _running=true; _lastRunAt=Date.now();
+    try{ _reRender(); }catch(_){}
+    finally{ _running=false; }
   }
-  window.addEventListener('resize',function(){clearTimeout(_reRT);_reRT=setTimeout(_maybeReRender,220);});
-  window.addEventListener('orientationchange',function(){setTimeout(function(){_lastW=window.innerWidth;_lastMOB=_mmMob.matches;_reRender();},300);});
+  function _scheduleReRender(){
+    var w=window.innerWidth, mob=_mmMob.matches;
+    if(w===_lastW && mob===_lastMOB) return; // só altura mudou → ignora
+    _lastW=w; _lastMOB=mob;
+    var now=Date.now(), since=now-_lastRunAt, wait=Math.max(0,600-since);
+    clearTimeout(_reRT);
+    _reRT=setTimeout(function(){
+      if(_pendingRAF) cancelAnimationFrame(_pendingRAF);
+      _pendingRAF=requestAnimationFrame(_runReRender);
+    }, wait);
+  }
+  window.addEventListener('resize',function(){
+    clearTimeout(_reRT);
+    _reRT=setTimeout(_scheduleReRender,300); // debounce inicial
+  }, {passive:true});
+  window.addEventListener('orientationchange',function(){
+    // rotação: espera o layout estabilizar e força re-render mesmo se width ainda não bateu
+    setTimeout(function(){
+      _lastW=window.innerWidth; _lastMOB=_mmMob.matches;
+      if(_pendingRAF) cancelAnimationFrame(_pendingRAF);
+      _pendingRAF=requestAnimationFrame(_runReRender);
+    }, 350);
+  }, {passive:true});
+  // matchMedia change (breakpoint atravessado sem resize, ex.: split-view)
+  if(_mmMob.addEventListener) _mmMob.addEventListener('change',_scheduleReRender);
+  else if(_mmMob.addListener) _mmMob.addListener(_scheduleReRender);
 
   // ─── Tooltip por toque em textos truncados do Gantt (coluna sticky) ───
   var _tt=document.createElement('div');
