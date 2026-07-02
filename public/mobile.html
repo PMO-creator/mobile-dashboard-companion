@@ -156,10 +156,11 @@
     .legend{font-size:13px;padding:8px 12px;gap:6px}
 
     /* ── Gantt ── */
-    .gantt-eixo-name{font-size:15px}
-    .gantt-eixo-id{font-size:14px;min-width:26px}
-    .gantt-eixo-count{font-size:13px;padding:2px 8px}
-    .gantt-status-chip{font-size:12px;padding:3px 8px}
+    .gantt-eixo-name{font-size:13px!important;line-height:1.25}
+    .gantt-eixo-id{font-size:11px!important;min-width:22px;padding:2px 6px!important}
+    .gantt-eixo-count{font-size:11px!important;padding:2px 7px!important}
+    .gantt-status-chip{font-size:10px!important;padding:2px 6px!important}
+    .gantt-eixo-header{padding:8px 10px!important;gap:6px!important}
     .gantt-svg-wrap::before{
       content:"↔  Role para ver o cronograma completo";
       display:block;padding:6px 16px;font-size:11px;
@@ -168,12 +169,32 @@
     }
 
     /* ── Requisições ── */
-    .req-kpi-row{grid-template-columns:repeat(2,1fr);gap:8px;padding:8px 12px}
-    .req-kpi-label{font-size:14px}
-    .req-kpi-value{font-size:22px}
-    .req-table-wrap{padding:0 8px 10px}
-    .req-q-table th,.req-q-table td{padding:8px 10px;font-size:13px}
-    .req-quadros-grid{padding:10px}
+    .req-header{padding:8px 12px!important}
+    .req-header h2{font-size:15px!important;letter-spacing:.3px}
+    .req-header span{font-size:11px!important}
+    .req-chevron{font-size:11px!important}
+    .req-filters{padding:8px 10px!important;gap:6px!important}
+    .req-filter-sel{font-size:11px!important;padding:4px 7px!important}
+    .req-status-filter{padding:6px 10px!important;gap:6px!important}
+    .req-dd-btn{font-size:12px!important;padding:5px 9px!important}
+    .req-clear-btn{font-size:11px!important;padding:5px 9px!important}
+    .req-kpi-row{grid-template-columns:repeat(2,1fr);gap:8px;padding:8px 10px}
+    .req-kpi{padding:8px 10px}
+    .req-kpi-label{font-size:11px!important;letter-spacing:.4px;margin-bottom:3px}
+    .req-kpi-value{font-size:20px!important}
+    .req-group-header{padding:9px 12px!important}
+    .req-group-title{font-size:12px!important;letter-spacing:.4px}
+    .req-group-count{font-size:11px!important;padding:3px 8px!important}
+    .req-quadro-header{padding:8px 12px!important}
+    .req-quadro-title{font-size:12px!important;letter-spacing:.3px}
+    .req-quadro-count{font-size:10px!important;padding:2px 7px!important}
+    .req-quadros-grid{padding:8px;gap:10px}
+    .req-group-body>.req-quadros-grid{padding:8px}
+    .req-table-wrap{padding:0 6px 8px}
+    table.req-q-table{font-size:11px!important}
+    .req-q-table th,.req-q-table td{padding:5px 6px!important;font-size:11px!important}
+    .req-q-table th:nth-child(2),.req-q-table td:nth-child(2){width:auto}
+    .req-status-chip{font-size:10px!important;padding:2px 7px!important}
 
     /* ── Refresh area ── */
     .refresh-area{margin-left:0}
