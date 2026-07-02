@@ -5444,7 +5444,39 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
   window.addEventListener('resize',function(){clearTimeout(_reRT);_reRT=setTimeout(_reRender,200);});
   window.addEventListener('orientationchange',function(){setTimeout(_reRender,300);});
 
+  // ─── Tooltip por toque em textos truncados do Gantt (coluna sticky) ───
+  var _tt=document.createElement('div');
+  _tt.id='gantt-tap-tooltip';
+  _tt.style.cssText='position:fixed;z-index:9999;max-width:82vw;padding:8px 12px;background:rgba(15,23,42,0.96);color:#fff;font:600 13px/1.35 -apple-system,system-ui,sans-serif;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.35);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s;white-space:normal;word-break:break-word';
+  document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(_tt);});
+  var _ttHide;
+  function _hideTip(){clearTimeout(_ttHide);_tt.style.opacity='0';_tt.style.transform='translateY(4px)';}
+  function _showTipAt(el){
+    var full=el.getAttribute('data-tip');if(!full)return;
+    _tt.textContent=full;
+    var r=el.getBoundingClientRect();
+    _tt.style.opacity='0';_tt.style.left='0px';_tt.style.top='0px';
+    // measure
+    _tt.style.opacity='0';_tt.style.visibility='hidden';_tt.style.transform='none';
+    _tt.getBoundingClientRect(); // reflow
+    var tw=_tt.offsetWidth, th=_tt.offsetHeight;
+    var vw=window.innerWidth, vh=window.innerHeight;
+    var x=Math.min(vw-tw-8, Math.max(8, r.left));
+    var y=r.bottom+6; if(y+th>vh-8) y=Math.max(8, r.top-th-6);
+    _tt.style.left=x+'px';_tt.style.top=y+'px';
+    _tt.style.visibility='visible';
+    requestAnimationFrame(function(){_tt.style.opacity='1';_tt.style.transform='translateY(0)';});
+    clearTimeout(_ttHide);_ttHide=setTimeout(_hideTip,3500);
+  }
+  document.addEventListener('click',function(ev){
+    var el=ev.target.closest && ev.target.closest('text.gtt');
+    if(el){ ev.stopPropagation(); _showTipAt(el); }
+    else if(_tt.style.opacity==='1'){ _hideTip(); }
+  },true);
+  window.addEventListener('scroll',_hideTip,true);
+
 })();
+
 </script>
 
 </body>
