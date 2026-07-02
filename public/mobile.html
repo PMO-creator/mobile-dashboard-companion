@@ -196,9 +196,16 @@
     .req-table-wrap{padding:0 6px 8px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
     /* Scroll horizontal dentro do quadro (todas as 7 colunas iguais entre status) */
     .req-quadro-body{overflow-x:auto!important;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
-    table.req-q-table{font-size:11px!important;width:max-content!important;min-width:100%!important;table-layout:fixed!important;border-collapse:collapse}
-    .req-q-table th,.req-q-table td{padding:8px 10px!important;font-size:11px!important;vertical-align:middle;box-sizing:border-box}
-    .req-q-table th{white-space:nowrap!important}
+    table.req-q-table{font-size:11px!important;width:max-content!important;min-width:100%!important;table-layout:fixed!important;border-collapse:separate!important;border-spacing:0}
+    .req-q-table th,.req-q-table td{padding:8px 10px!important;font-size:11px!important;vertical-align:middle;box-sizing:border-box;border-bottom:1px solid #EEF2F6}
+    /* thead sticky no topo do scroller horizontal do quadro */
+    .req-q-table thead th{position:-webkit-sticky!important;position:sticky!important;top:0;z-index:4;background:#F1F5F9!important;color:#475569;font-weight:800;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap!important;box-shadow:0 2px 0 #E2E8F0}
+    /* Coluna Req# sticky à esquerda para manter o ID visível ao rolar */
+    .req-q-table td:nth-child(1){position:-webkit-sticky!important;position:sticky!important;left:0;z-index:2}
+    .req-q-table thead th:nth-child(1){left:0;z-index:5}
+    /* Mini-cabeçalho do quadro (status) fixo no topo enquanto rola a página */
+    .req-quadro{overflow:visible!important}
+    .req-quadro-header{position:-webkit-sticky!important;position:sticky!important;top:0;z-index:7}
     .req-q-table th:nth-child(1),.req-q-table td:nth-child(1){width:56px!important;min-width:56px;text-align:center}
     .req-q-table th:nth-child(2),.req-q-table td:nth-child(2){width:170px!important;min-width:170px!important;max-width:170px!important;white-space:normal;word-break:normal;overflow-wrap:break-word}
     .req-q-table th:nth-child(3),.req-q-table td:nth-child(3){width:200px!important;min-width:200px;white-space:normal;word-break:break-word}
