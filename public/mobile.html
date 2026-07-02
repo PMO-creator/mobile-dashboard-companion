@@ -3516,9 +3516,10 @@ function renderGanttForEixo(gi){
 
   // ── Dimensões e range ──────────────────────────────────────────────────────
   const isWeekly = ganttMode==='weekly';
-  const LW=(window.innerWidth<768?200:400), TW=1800;
+  const MOB=window.innerWidth<768;
+  const LW=(MOB?188:400), TW=1800;
   const CS=new Date('2026-01-01'), CE=new Date('2026-12-31');
-  const GRH=68, TRH=50, SRH=38;
+  const GRH=MOB?44:68, TRH=MOB?34:50, SRH=MOB?26:38;
   const HY=isWeekly?22:24, HM=isWeekly?36:48, HW=isWeekly?32:0;
   const HH=HY+HM+HW;
   const TOTMS=CE-CS;
@@ -3599,8 +3600,9 @@ function renderGanttForEixo(gi){
         sL+=`<text x="14" y="${(cy+rh/2+5).toFixed(1)}" font-size="14" fill="#3A6018" font-weight="700">${arrow}</text>`;
       }
       sL+=`<circle cx="${LW-16}" cy="${(cy+rh/2).toFixed(1)}" r="7" fill="${col}"/>`;
-      const nm=g.name.length>44?g.name.slice(0,42)+'…':g.name;
-      sL+=`<text x="30" y="${(cy+rh/2+5).toFixed(1)}" font-size="15" fill="#1A2E0A" font-weight="700">${escSVG(nm)}</text>`;
+      const _MAX=MOB?20:44;
+      const nm=g.name.length>_MAX?g.name.slice(0,_MAX-2)+'…':g.name;
+      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}</text>`;
       if(row.hasTasks)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttGroup(${gi},${row.ri})"/>`;
       // Barra (sR)
       if(g.start&&g.end){
@@ -3625,8 +3627,9 @@ function renderGanttForEixo(gi){
       if(row.hasSubs){const arrow=row.marcoExp?'▾':'▶';sL+=`<text x="10" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="11" fill="#5A8A2E" font-weight="700">${arrow}</text>`;}
       sL+=`<line x1="22" y1="${cy}" x2="22" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
       sL+=`<line x1="22" y1="${cy+rh/2}" x2="36" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
-      const nm=(t.tarefa||'').length>46?(t.tarefa||'').slice(0,44)+'…':(t.tarefa||'');
-      sL+=`<text x="39" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="13" fill="#2D4A1E" font-weight="700">${escSVG(nm)}</text>`;
+      const _TMAX=MOB?22:46;
+      const nm=(t.tarefa||'').length>_TMAX?(t.tarefa||'').slice(0,_TMAX-2)+'…':(t.tarefa||'');
+      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700">${escSVG(nm)}</text>`;
       if(row.hasSubs)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttMarco(${gi},${row.parentRi},${row.ti})"/>`;
       // Barra (sR)
       if(t.start&&t.end){
@@ -3653,8 +3656,9 @@ function renderGanttForEixo(gi){
       const col=sc(t.status||'A iniciar');
       sL+=`<line x1="44" y1="${cy}" x2="44" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
-      const nm=(t.tarefa||'').length>48?(t.tarefa||'').slice(0,46)+'…':(t.tarefa||'');
-      sL+=`<text x="59" y="${(cy+rh/2+4).toFixed(1)}" font-size="11" fill="#0F172A" font-weight="550">${escSVG(nm)}</text>`;
+      const _TFMAX=MOB?24:48;
+      const nm=(t.tarefa||'').length>_TFMAX?(t.tarefa||'').slice(0,_TFMAX-2)+'…':(t.tarefa||'');
+      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}</text>`;
       // Barra (sR)
       if(t.start&&t.end){
         const fullBx=Math.max(0,pxR(new Date(t.start)));
@@ -3672,7 +3676,7 @@ function renderGanttForEixo(gi){
 
   // ── Header esquerdo (sL) ──────────────────────────────────────────────────
   sL+=`<rect width="${LW}" height="${HH}" fill="#1E2E0D"/>`;
-  sL+=`<text x="${LW/2}" y="${HH/2+6}" text-anchor="middle" font-size="13" fill="#8AB870" font-weight="700">GRUPO / MARCO / TAREFA</text>`;
+  sL+=`<text x="${LW/2}" y="${HH/2+6}" text-anchor="middle" font-size="${MOB?11:13}" fill="#8AB870" font-weight="700">GRUPO / MARCO / TAREFA</text>`;
   sL+='</svg>';
 
   // ── Header direito (sR) ───────────────────────────────────────────────────
@@ -3948,7 +3952,7 @@ function renderGanttForEixoDir(gi){
   const MOB=window.innerWidth<768;
   const LW=(MOB?188:400),TW=1800;
   const CS=new Date('2026-01-01'),CE=new Date('2026-12-31');
-  const GRH=68,TRH=50,SRH=38;
+  const GRH=MOB?44:68,TRH=MOB?34:50,SRH=MOB?26:38;
   const HY=isWeekly?22:24,HM=isWeekly?36:48,HW=isWeekly?32:0;
   const HH=HY+HM+HW;
   const TOTMS=CE-CS;
