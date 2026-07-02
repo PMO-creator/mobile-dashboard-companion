@@ -3677,9 +3677,9 @@ function renderGanttForEixo(gi){
       const col=sc(t.status||'A iniciar');
       sL+=`<line x1="44" y1="${cy}" x2="44" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
-      const _TFMAX=MOB?24:48;
-      const nm=(t.tarefa||'').length>_TFMAX?(t.tarefa||'').slice(0,_TFMAX-2)+'…':(t.tarefa||'');
-      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}</text>`;
+      const _TFMAX=MOB?24:48, _fullTF=(t.tarefa||'');
+      const _trTF=_fullTF.length>_TFMAX, nm=_trTF?_fullTF.slice(0,_TFMAX-2)+'…':_fullTF;
+      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}${_trTF?`<title>${escSVG(_fullTF)}</title>`:''}</text>`;
       // Barra (sR)
       if(t.start&&t.end){
         const fullBx=Math.max(0,pxR(new Date(t.start)));
