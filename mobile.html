@@ -3623,7 +3623,7 @@ function renderGanttForEixo(gi){
       sL+=`<circle cx="${LW-16}" cy="${(cy+rh/2).toFixed(1)}" r="7" fill="${col}"/>`;
       const _MAX=MOB?16:44;
       const _trG=g.name.length>_MAX, nm=_trG?g.name.slice(0,_MAX-2)+'…':g.name;
-      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}${_trG?`<title>${escSVG(g.name)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700"${_trG?` class="gtt" data-tip="${escSVG(g.name)}"`:''}>${escSVG(nm)}${_trG?`<title>${escSVG(g.name)}</title>`:''}</text>`;
       if(row.hasTasks)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttGroup(${gi},${row.ri})"/>`;
       // Barra (sR)
       if(g.start&&g.end){
@@ -3650,7 +3650,7 @@ function renderGanttForEixo(gi){
       sL+=`<line x1="22" y1="${cy+rh/2}" x2="36" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
       const _TMAX=MOB?18:46, _fullT=(t.tarefa||'');
       const _trT=_fullT.length>_TMAX, nm=_trT?_fullT.slice(0,_TMAX-2)+'…':_fullT;
-      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700">${escSVG(nm)}${_trT?`<title>${escSVG(_fullT)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700"${_trT?` class="gtt" data-tip="${escSVG(_fullT)}"`:''}>${escSVG(nm)}${_trT?`<title>${escSVG(_fullT)}</title>`:''}</text>`;
       if(row.hasSubs)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttMarco(${gi},${row.parentRi},${row.ti})"/>`;
       // Barra (sR)
       if(t.start&&t.end){
@@ -3679,7 +3679,7 @@ function renderGanttForEixo(gi){
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       const _TFMAX=MOB?20:48, _fullTF=(t.tarefa||'');
       const _trTF=_fullTF.length>_TFMAX, nm=_trTF?_fullTF.slice(0,_TFMAX-2)+'…':_fullTF;
-      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}${_trTF?`<title>${escSVG(_fullTF)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550"${_trTF?` class="gtt" data-tip="${escSVG(_fullTF)}"`:''}>${escSVG(nm)}${_trTF?`<title>${escSVG(_fullTF)}</title>`:''}</text>`;
       // Barra (sR)
       if(t.start&&t.end){
         const fullBx=Math.max(0,pxR(new Date(t.start)));
@@ -4026,7 +4026,7 @@ function renderGanttForEixoDir(gi){
       sL+=`<circle cx="${LW-16}" cy="${(cy+rh/2).toFixed(1)}" r="7" fill="${col}"/>`;
       const MAX=MOB?16:44;
       const _trGd=g.name.length>MAX, nm=_trGd?g.name.slice(0,MAX-2)+'...':g.name;
-      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}${_trGd?`<title>${escSVG(g.name)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700"${_trGd?` class="gtt" data-tip="${escSVG(g.name)}"`:''}>${escSVG(nm)}${_trGd?`<title>${escSVG(g.name)}</title>`:''}</text>`;
       if(row.hasTasks)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttGroupDir(${gi},${row.ri})"/>`;
       if(g.start&&g.end){
         const clipL=fDS&&g.start<fDS,clipR=fDE&&g.end>fDE;
@@ -4047,7 +4047,7 @@ function renderGanttForEixoDir(gi){
       sL+=`<line x1="22" y1="${cy+rh/2}" x2="36" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
       const TMAX=MOB?18:46, _fullTd=(t.tarefa||'');
       const _trTd=_fullTd.length>TMAX, nm=_trTd?_fullTd.slice(0,TMAX-2)+'...':_fullTd;
-      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700">${escSVG(nm)}${_trTd?`<title>${escSVG(_fullTd)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700"${_trTd?` class="gtt" data-tip="${escSVG(_fullTd)}"`:''}>${escSVG(nm)}${_trTd?`<title>${escSVG(_fullTd)}</title>`:''}</text>`;
       if(row.hasSubs)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttMarcoDir(${gi},${row.parentRi},${row.ti})"/>`;
       if(t.start&&t.end){
         const clipL=fDS&&t.start<fDS,clipR=fDE&&t.end>fDE;
@@ -4070,7 +4070,7 @@ function renderGanttForEixoDir(gi){
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       const TFMAX=MOB?20:48, _fullTFd=(t.tarefa||'');
       const _trTFd=_fullTFd.length>TFMAX, nm=_trTFd?_fullTFd.slice(0,TFMAX-2)+'...':_fullTFd;
-      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}${_trTFd?`<title>${escSVG(_fullTFd)}</title>`:''}</text>`;
+      sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550"${_trTFd?` class="gtt" data-tip="${escSVG(_fullTFd)}"`:''}>${escSVG(nm)}${_trTFd?`<title>${escSVG(_fullTFd)}</title>`:''}</text>`;
       if(t.start&&t.end){
         const fullBx=Math.max(0,pxR(new Date(t.start))),fullEx=Math.max(fullBx+3,pxR(new Date(t.end)));
         const solidW=Math.max(3,fullEx-fullBx),by=cy+5,bh=rh-10;
@@ -5444,7 +5444,39 @@ function _buildGanttSVGForExport(ai,fDS,fDE,viewMode,fmt){
   window.addEventListener('resize',function(){clearTimeout(_reRT);_reRT=setTimeout(_reRender,200);});
   window.addEventListener('orientationchange',function(){setTimeout(_reRender,300);});
 
+  // ─── Tooltip por toque em textos truncados do Gantt (coluna sticky) ───
+  var _tt=document.createElement('div');
+  _tt.id='gantt-tap-tooltip';
+  _tt.style.cssText='position:fixed;z-index:9999;max-width:82vw;padding:8px 12px;background:rgba(15,23,42,0.96);color:#fff;font:600 13px/1.35 -apple-system,system-ui,sans-serif;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.35);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s;white-space:normal;word-break:break-word';
+  document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(_tt);});
+  var _ttHide;
+  function _hideTip(){clearTimeout(_ttHide);_tt.style.opacity='0';_tt.style.transform='translateY(4px)';}
+  function _showTipAt(el){
+    var full=el.getAttribute('data-tip');if(!full)return;
+    _tt.textContent=full;
+    var r=el.getBoundingClientRect();
+    _tt.style.opacity='0';_tt.style.left='0px';_tt.style.top='0px';
+    // measure
+    _tt.style.opacity='0';_tt.style.visibility='hidden';_tt.style.transform='none';
+    _tt.getBoundingClientRect(); // reflow
+    var tw=_tt.offsetWidth, th=_tt.offsetHeight;
+    var vw=window.innerWidth, vh=window.innerHeight;
+    var x=Math.min(vw-tw-8, Math.max(8, r.left));
+    var y=r.bottom+6; if(y+th>vh-8) y=Math.max(8, r.top-th-6);
+    _tt.style.left=x+'px';_tt.style.top=y+'px';
+    _tt.style.visibility='visible';
+    requestAnimationFrame(function(){_tt.style.opacity='1';_tt.style.transform='translateY(0)';});
+    clearTimeout(_ttHide);_ttHide=setTimeout(_hideTip,3500);
+  }
+  document.addEventListener('click',function(ev){
+    var el=ev.target.closest && ev.target.closest('text.gtt');
+    if(el){ ev.stopPropagation(); _showTipAt(el); }
+    else if(_tt.style.opacity==='1'){ _hideTip(); }
+  },true);
+  window.addEventListener('scroll',_hideTip,true);
+
 })();
+
 </script>
 
 </body>
