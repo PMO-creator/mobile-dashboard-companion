@@ -193,11 +193,20 @@
     .req-quadro-count{font-size:10px!important;padding:2px 7px!important}
     .req-quadros-grid{padding:8px;gap:10px}
     .req-group-body>.req-quadros-grid{padding:8px}
-    .req-table-wrap{padding:0 6px 8px}
-    table.req-q-table{font-size:11px!important}
-    .req-q-table th,.req-q-table td{padding:5px 6px!important;font-size:11px!important}
-    .req-q-table th:nth-child(2),.req-q-table td:nth-child(2){width:auto}
-    .req-status-chip{font-size:10px!important;padding:2px 7px!important}
+    .req-table-wrap{padding:0 6px 8px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+    /* Colunas com LARGURA FIXA e IDÊNTICA em todos os quadros/status */
+    table.req-q-table{font-size:11px!important;width:auto!important;min-width:100%;table-layout:fixed}
+    .req-q-table th,.req-q-table td{padding:7px 8px!important;font-size:11px!important;vertical-align:middle}
+    .req-q-table th:nth-child(1),.req-q-table td:nth-child(1){width:64px!important;text-align:center}
+    .req-q-table th:nth-child(2),.req-q-table td:nth-child(2){width:150px!important;white-space:normal;word-break:break-word;overflow:hidden;text-overflow:initial}
+    .req-q-table th:nth-child(3),.req-q-table td:nth-child(3){width:180px!important;white-space:normal;word-break:break-word;overflow:hidden;text-overflow:initial}
+    .req-q-table th:nth-child(4),.req-q-table td:nth-child(4){width:104px!important;white-space:normal}
+    .req-q-table tr{min-height:44px}
+    .req-q-table tr:hover td{background:transparent} /* mata hover no touch */
+    .req-q-table tr:active td{background:#F1F5F9}
+    .req-status-chip{font-size:10px!important;padding:2px 7px!important;white-space:normal;line-height:1.25}
+    /* Alvos de toque: header e linhas */
+    .req-header,.req-group-header,.req-quadro-header{touch-action:manipulation;-webkit-tap-highlight-color:rgba(138,196,58,.15)}
 
     /* ── Refresh area ── */
     .refresh-area{margin-left:0}
@@ -221,9 +230,8 @@
     .eixo-name{font-size:13px}
     .grupo-name{font-size:13px}
     .wbs-header h2,.req-header h2,.gantt-section-title h2{font-size:16px}
-    /* Tabelas: esconde colunas menos críticas */
-    .req-q-table th:nth-child(4),
-    .req-q-table td:nth-child(4){display:none}
+    /* Mantém TODAS as colunas visíveis mesmo em telas muito pequenas —
+       o scroll horizontal cuida do excesso e as larguras permanecem consistentes */
   }
   .chart-card{background:var(--card);border-radius:var(--radius);padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
   .chart-card h3{font-size:16px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
