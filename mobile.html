@@ -3621,7 +3621,7 @@ function renderGanttForEixo(gi){
         sL+=`<text x="14" y="${(cy+rh/2+5).toFixed(1)}" font-size="14" fill="#3A6018" font-weight="700">${arrow}</text>`;
       }
       sL+=`<circle cx="${LW-16}" cy="${(cy+rh/2).toFixed(1)}" r="7" fill="${col}"/>`;
-      const _MAX=MOB?20:44;
+      const _MAX=MOB?16:44;
       const _trG=g.name.length>_MAX, nm=_trG?g.name.slice(0,_MAX-2)+'…':g.name;
       sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}${_trG?`<title>${escSVG(g.name)}</title>`:''}</text>`;
       if(row.hasTasks)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttGroup(${gi},${row.ri})"/>`;
@@ -3648,7 +3648,7 @@ function renderGanttForEixo(gi){
       if(row.hasSubs){const arrow=row.marcoExp?'▾':'▶';sL+=`<text x="10" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="11" fill="#5A8A2E" font-weight="700">${arrow}</text>`;}
       sL+=`<line x1="22" y1="${cy}" x2="22" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
       sL+=`<line x1="22" y1="${cy+rh/2}" x2="36" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
-      const _TMAX=MOB?22:46, _fullT=(t.tarefa||'');
+      const _TMAX=MOB?18:46, _fullT=(t.tarefa||'');
       const _trT=_fullT.length>_TMAX, nm=_trT?_fullT.slice(0,_TMAX-2)+'…':_fullT;
       sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700">${escSVG(nm)}${_trT?`<title>${escSVG(_fullT)}</title>`:''}</text>`;
       if(row.hasSubs)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttMarco(${gi},${row.parentRi},${row.ti})"/>`;
@@ -3677,7 +3677,7 @@ function renderGanttForEixo(gi){
       const col=sc(t.status||'A iniciar');
       sL+=`<line x1="44" y1="${cy}" x2="44" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
-      const _TFMAX=MOB?24:48, _fullTF=(t.tarefa||'');
+      const _TFMAX=MOB?20:48, _fullTF=(t.tarefa||'');
       const _trTF=_fullTF.length>_TFMAX, nm=_trTF?_fullTF.slice(0,_TFMAX-2)+'…':_fullTF;
       sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}${_trTF?`<title>${escSVG(_fullTF)}</title>`:''}</text>`;
       // Barra (sR)
@@ -4024,7 +4024,7 @@ function renderGanttForEixoDir(gi){
       sL+=`<rect x="0" y="${cy}" width="4" height="${rh}" fill="${col}" opacity="0.8"/>`;
       if(row.hasTasks){const arrow=row.expanded?'▾':'▶';sL+=`<text x="14" y="${(cy+rh/2+5).toFixed(1)}" font-size="14" fill="#3A6018" font-weight="700">${arrow}</text>`;}
       sL+=`<circle cx="${LW-16}" cy="${(cy+rh/2).toFixed(1)}" r="7" fill="${col}"/>`;
-      const MAX=MOB?20:44;
+      const MAX=MOB?16:44;
       const _trGd=g.name.length>MAX, nm=_trGd?g.name.slice(0,MAX-2)+'...':g.name;
       sL+=`<text x="${MOB?26:30}" y="${(cy+rh/2+5).toFixed(1)}" font-size="${MOB?12:15}" fill="#1A2E0A" font-weight="700">${escSVG(nm)}${_trGd?`<title>${escSVG(g.name)}</title>`:''}</text>`;
       if(row.hasTasks)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttGroupDir(${gi},${row.ri})"/>`;
@@ -4045,7 +4045,7 @@ function renderGanttForEixoDir(gi){
       if(row.hasSubs){const arrow=row.marcoExp?'▾':'▶';sL+=`<text x="10" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="11" fill="#5A8A2E" font-weight="700">${arrow}</text>`;}
       sL+=`<line x1="22" y1="${cy}" x2="22" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
       sL+=`<line x1="22" y1="${cy+rh/2}" x2="36" y2="${cy+rh/2}" stroke="#B0C8A0" stroke-width="1.5"/>`;
-      const TMAX=MOB?22:46, _fullTd=(t.tarefa||'');
+      const TMAX=MOB?18:46, _fullTd=(t.tarefa||'');
       const _trTd=_fullTd.length>TMAX, nm=_trTd?_fullTd.slice(0,TMAX-2)+'...':_fullTd;
       sL+=`<text x="${MOB?32:39}" y="${(cy+rh/2+4.5).toFixed(1)}" font-size="${MOB?11:13}" fill="#2D4A1E" font-weight="700">${escSVG(nm)}${_trTd?`<title>${escSVG(_fullTd)}</title>`:''}</text>`;
       if(row.hasSubs)sL+=`<rect x="0" y="${cy}" width="${LW}" height="${rh}" fill="transparent" cursor="pointer" onclick="toggleGanttMarcoDir(${gi},${row.parentRi},${row.ti})"/>`;
@@ -4068,7 +4068,7 @@ function renderGanttForEixoDir(gi){
       const t=row.data,col=sc(t.status||'A iniciar');
       sL+=`<line x1="44" y1="${cy}" x2="44" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
       sL+=`<line x1="44" y1="${cy+rh/2}" x2="56" y2="${cy+rh/2}" stroke="#C8DEBA" stroke-width="1"/>`;
-      const TFMAX=MOB?24:48, _fullTFd=(t.tarefa||'');
+      const TFMAX=MOB?20:48, _fullTFd=(t.tarefa||'');
       const _trTFd=_fullTFd.length>TFMAX, nm=_trTFd?_fullTFd.slice(0,TFMAX-2)+'...':_fullTFd;
       sL+=`<text x="${MOB?50:59}" y="${(cy+rh/2+4).toFixed(1)}" font-size="${MOB?10:11}" fill="#0F172A" font-weight="550">${escSVG(nm)}${_trTFd?`<title>${escSVG(_fullTFd)}</title>`:''}</text>`;
       if(t.start&&t.end){
