@@ -14,7 +14,7 @@
     --border:#E2E8F0;--text:#1E293B;--muted:#64748B;
     --accent:#8AC43A;--accentD:#6BA030;
     --feito:#05C46B;--andam:#1A56FF;--atraso:#FF2525;
-    --risco:#FF6B00;--iniciar:#5A6E85;--definir:#92400E;--cancel:#374151;
+    --risco:#FFD966;--iniciar:#5A6E85;--definir:#92400E;--cancel:#374151;
     --radius:10px;--gap:32px;
   }
   @keyframes loader-spin{to{transform:rotate(360deg)}}
@@ -825,7 +825,7 @@
         <label class="ms-option ms-all-opt"><input type="checkbox" id="ms-status-chk-all" checked onchange="onMsAll('status',this)"><span style="font-weight:700;font-style:italic;color:#8AC43A">Todos</span></label>
         <hr class="ms-divider">
         <label class="ms-option"><input type="checkbox" value="Atrasado" checked onchange="onMsChange('status')"><span class="ms-dot" style="background:#FF2525"></span>Atrasado</label>
-        <label class="ms-option"><input type="checkbox" value="Risco de atraso" checked onchange="onMsChange('status')"><span class="ms-dot" style="background:#FF6B00"></span>Risco de atraso</label>
+        <label class="ms-option"><input type="checkbox" value="Risco de atraso" checked onchange="onMsChange('status')"><span class="ms-dot" style="background:#FFD966"></span>Risco de atraso</label>
         <label class="ms-option"><input type="checkbox" value="Em andamento" checked onchange="onMsChange('status')"><span class="ms-dot" style="background:#1A56FF"></span>Em andamento</label>
         <label class="ms-option"><input type="checkbox" value="Feito" checked onchange="onMsChange('status')"><span class="ms-dot" style="background:#05C46B"></span>Feito</label>
         <label class="ms-option"><input type="checkbox" value="A iniciar" checked onchange="onMsChange('status')"><span class="ms-dot" style="background:#5A6E85"></span>A iniciar</label>
@@ -1150,7 +1150,7 @@
 const STATUS = {
   'Feito':               {color:'#05C46B',label:'FEITO'},
   'Em andamento':        {color:'#1A56FF',label:'EM AND.'},
-  'Risco de atraso':     {color:'#FF6B00',label:'RISCO'},
+  'Risco de atraso':     {color:'#FFD966',label:'RISCO'},
   'Atrasado':            {color:'#FF2525',label:'ATRASADO'},
   'A iniciar':           {color:'#5A6E85',label:'A INICIAR'},
   'Definir datas':       {color:'#92400E',label:'DEF. DATAS'},
@@ -1623,7 +1623,7 @@ function renderCharts(){
     data:{labels,
       datasets:[
         {label:'Atrasado',     data:WBS.map(g=>g.children.filter(c=>c.status==='Atrasado').length),        backgroundColor:'#DC2626CC',borderRadius:2},
-        {label:'Risco',        data:WBS.map(g=>g.children.filter(c=>c.status==='Risco de atraso').length), backgroundColor:'#EA580CCC',borderRadius:2},
+        {label:'Risco',        data:WBS.map(g=>g.children.filter(c=>c.status==='Risco de atraso').length), backgroundColor:'#FFD966CC',borderRadius:2},
         {label:'Em Andamento', data:WBS.map(g=>g.children.filter(c=>c.status==='Em andamento').length),    backgroundColor:'#2563EBCC',borderRadius:2},
         {label:'Feito',        data:WBS.map(g=>g.children.filter(c=>c.status==='Feito').length),           backgroundColor:'#16A34ACC',borderRadius:2},
         {label:'Outros',       data:WBS.map(g=>g.children.filter(c=>!['Atrasado','Risco de atraso','Em andamento','Feito'].includes(c.status)).length),backgroundColor:'#94A3B8CC',borderRadius:2},
